@@ -4,10 +4,9 @@ using namespace std;
 
 class Song{
     public:
-        void setSong(string, string, int, int, int, int, int, int, int, int, bool);
+        void setSong(string, string, string, string, string, bool);
         void toString();
     private:
-        string title, artist;
-        int mins, secs, day, month, year, addSec, addMin, addHour;
+        string title, artist, time, date, duration;
         bool Explicit;        
 };
