@@ -4,8 +4,7 @@
 #include "Song.h"
 
 
-
-void Song::setSong(string inTitle, string inArtist, string inDuration, string inDate, string inTime, bool inExplicit){
+void Song::setSongInfo(string inTitle, string inArtist, string inDuration, string inDate, string inTime, bool inExplicit){
     title = inTitle;
     artist = inArtist;
     duration = inDuration;

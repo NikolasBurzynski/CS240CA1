@@ -1,13 +1,13 @@
 #include <iostream>
 #include <string>
-#include "Song.h"
+#include "Library.h"
 using namespace std;
 
 const int MAX_SONGS = 1;
-Song library[MAX_SONGS];
+Library library(MAX_SONGS);
 
-void addSong(int *numSongs){
-    if(*numSongs > MAX_SONGS - 1) {
+void addSong(){
+    if(library.numSongs == MAX_SONGS) {
         cout << "Sorry your library is full!" << endl;
     }else{
         cin.ignore();
@@ -25,32 +25,31 @@ void addSong(int *numSongs){
         string time; getline(cin, time);
         cout << "And lastly does this song contain explicit lyrics? Type \"0\" for no and \"1\" for yes.\n";
         bool exp; cin >> exp;
-        library[*numSongs].setSong(title, artist, duration, date, time, exp);
-        *numSongs+=1;
-        cout << "Song Added!" <<endl;
+        Song newSong;
+        newSong.setSongInfo(title, artist, duration, date, time, exp);
+        library.addSong(newSong);
+        cout << "Song Added!" << endl;
     }
 }
 
-void showSongs(int *numSongs){
-    if(*numSongs == 0) cout << "There are no songs in the library\n";
+void showSongs(){
+    if(library.numSongs == 0) cout << "There are no songs in the library\n";
     else{
-        for(int i = 0; i < *numSongs; i++){
-            library[i].toString();
-        }
+        library.printLibrary();
     }
 }
 
-int UI(int *numSongs){
+int UI(){
     cout<<"\n\nType: \"Add\" to add a song\n";
     cout<<"Type: \"Show\" to show all the songs in our library\n";
     cout<<"Type: \"Exit\" to exit the program\n\n";
     string selection;
     cin >> selection;
     if(selection.compare("Add") == 0){
-        addSong(numSongs);
+        addSong();
         return 0;
     }else if(selection.compare("Show") == 0){
-        showSongs(numSongs);
+        showSongs();
         return 0;
     }else if(selection.compare("Exit") == 0){
         return 1;
@@ -61,8 +60,7 @@ int UI(int *numSongs){
 }
 
 int main(){
-    int numSongs = 0;
     cout<<"\nHello and welcome to Nikofy!\n";
-    while(UI(&numSongs) == 0);
+    while(UI() == 0);
     cout << "Ending Program" << endl;
 }
